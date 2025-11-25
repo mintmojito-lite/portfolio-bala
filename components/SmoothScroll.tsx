@@ -6,22 +6,25 @@ import Projects from "../components/Projects";
 import Certifications from "../components/Certifications";
 import Playlist from "../components/Playlist";
 import Contact from "../components/Contact";
+import SystemNotice from "../components/SystemNotice"; // Import the notice
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-black text-[#333] overflow-x-hidden">
       
-      {/* 1. Sidebar removed.
-         2. Layout is now full width (w-full) and centered.
-      */}
+      {/* The System Notice (Fixed at top) */}
+      <SystemNotice />
+
+      {/* Main Content Wrapper */}
       <div className="w-full flex flex-col items-center">
         
-        <Hero />
-        
-
-
-        {/* Content Container: Limits width on huge screens for better reading */}
+        {/* Full Screen Intro */}
         <div className="w-full">
+          <Hero />
+        </div>
+        
+        {/* Content Container */}
+        <div className="w-full max-w-full">
           <About />
           <Projects />
           <Certifications />

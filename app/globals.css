@@ -24,3 +24,14 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Only hide default cursor on desktop, keep it visible on mobile */
+@media (min-width: 768px) {
+  body {
+    cursor: none;
+  }
+
+  a, button, .cursor-pointer {
+    cursor: none !important;
+  }
+}
