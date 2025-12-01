@@ -1,19 +1,19 @@
 "use client";
 import { motion } from "framer-motion";
+import CanvasCursor from "./ui/canvas-cursor";
 
 export default function Hero() {
   return (
-    <section className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-black px-6 text-center">
-      
-      {/* Background Grid */}
-      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#111_1px,transparent_1px),linear-gradient(to_bottom,#111_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-        <div className="absolute inset-0 bg-black [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,transparent_20%,black_100%)]" />
+    <section id="hero-cursor-area" className="relative flex w-full flex-col items-center overflow-hidden px-6 text-center bg-transparent pt-0 pb-12">
+      {/* The Canvas Cursor */}
+      <div className="absolute inset-0 z-[1]">
+        <CanvasCursor />
       </div>
 
+      {/* Content (Top Layer) */}
       <div className="relative z-10 max-w-5xl">
-        <h1 className="mb-8 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#333] transition-colors duration-500 hover:text-white">
-          Hi, I’m{" "}
+        <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#333] transition-colors duration-500 hover:text-white">
+          Hi, I'm{" "}
           <span className="text-cyan-900 transition-colors duration-500 hover:text-cyan-400">
             Bala Bhaskar
           </span>
@@ -25,7 +25,7 @@ export default function Hero() {
           transition={{ delay: 0.5, duration: 1 }}
           className="mx-auto max-w-3xl text-base sm:text-lg md:text-xl leading-relaxed text-[#555] font-mono transition-colors duration-500 hover:text-gray-300"
         >
-          "I believe making a system is better than flexing the sugarcoated certificates."
+          "I believe making a systems is better than flexing the sugarcoated certificates."
         </motion.p>
       </div>
 

@@ -1,173 +1,139 @@
 "use client";
-import React, { useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import React from "react";
+import { ProjectStack } from "./ui/project-stack";
+import { ContainerScroll, CardSticky } from "./ui/container-scroll";
 
-// UPDATED DATA: Includes 'id' and 'stack' to match the Profile Card look
 const projects = [
-  { 
-    id: "SYS_309",
-    name: "Semantic Code Gen Engine", 
-    short: "AI Architecture Validation", 
-    detail: "AI-powered semantic code generation engine using LLM + Knowledge Graph for architecture validation.",
-    stack: ["LLM", "Python", "Neo4j"],
-    docLink: "https://github.com/mintmojito-lite/Semantic-Code-Gen-Engine-309" 
+  {
+    id: "SRAV",
+    name: "SRAV Secure Retentive Attenuation & Verification Time-Bound Data Decay Security System",
+    short: "Data Decay Architecture",
+    detail: "Cryptographic decay system enforcing time-bound access and irreversible precision attenuation for sensitive data.",
+    stack: ["Security","Data", "ZK-Logic", "Compliance"],
+    docLink: "https://github.com/mintmojito-lite"
   },
-  { 
-    id: "AUTH_SSL",
-    name: "SSL Based Login Flow", 
-    short: "Passwordless Auth System", 
-    detail: "A complete ZKP & SSL-based login flow ensuring high-security passwordless authentication.",
-    stack: ["OpenSSL", "Node.js", "Crypto"],
-    docLink: "https://docs.google.com/document/d/189XKS1GaqURzpD9JDJt-Mg-TGNGAXFrZ7wYWs55kY2k/edit?usp=sharing" 
+  {
+    id: "PQER",
+    name: "Predictive Quantum-Entanglement Router  Moving Target Defense System for DDoS Mitigation",
+    short: "Quantum MTD Router",
+    detail: "Predictive entanglement-based routing achieving continuous attack-surface shift for DDoS immunity.",
+    stack: ["Networking", "Defense", "Simulation"],
+    docLink: "https://github.com/mintmojito-lite"
   },
-  { 
-    id: "SRAV_V1",
-    name: "SRAV", 
-    short: "Autonomous Verification", 
-    detail: "Data decay framework ensuring sensitive information self-destructs after trust windows expire.",
-    stack: ["Rust", "Blockchain", "Security"],
-    docLink: "https://docs.google.com/document/d/1jfSLypcuEUSOwvUq9hzlO1eB850P8re3eybX5_tkt1M/edit?usp=sharing" 
+  {
+    id: "ZKUA",
+    name: "Zero-Knowledge Unified Access Privacy-Preserving Federated Medical Intelligence Framework",
+    short: "Zero-Knowledge FL",
+    detail: "Federated Medical AI where global model trust is verifiable without exposing private data.",
+    stack: ["ZKP", "FL", "PyTorch"],
+    docLink: "https://github.com/mintmojito-lite"
   },
-  { 
-    id: "PQER_NET",
-    name: "PQER", 
-    short: "Quantum Entanglement Router", 
-    detail: "Moving Target Defense (MTD) strategy that predicts DDoS vectors and re-routes traffic dynamically.",
-    stack: ["Networking", "AI", "Routing"],
-    docLink: "https://docs.google.com/document/d/1Md5gwXgCEeXdMFcTIsnzbOHFDZXe6fYEAOzNdWoA-yA/edit?usp=sharing" 
+  {
+    id: "EVI",
+    name: "Immutable Digital Evidence Chain-of-Custody & Forensic Verification System",
+    short: "Digital Forensics Ledger",
+    detail: "Immutable chain-of-custody protocol with tamperproof hash-linked logging for evidence handling.",
+    stack: ["Forensics", "Web3"],
+    docLink: "https://github.com/mintmojito-lite"
   },
-  { 
-    id: "ZKUA_PROTO",
-    name: "ZKUA", 
-    short: "Zero-Knowledge Aggregator", 
-    detail: "Federated learning protocol verifying model updates without exposing raw training data.",
-    stack: ["ZK-Proofs", "PyTorch", "Federated"],
-    docLink: "https://github.com/mintmojito-lite/zkua-federated-healthcare-verification" 
+  {
+    id: "MMDE",
+    name: "Multi-Metric Disease Evaluation Clinical Analytics & Risk Assessment Simulator",
+    short: "Medical Risk Analytics",
+    detail: "WHO-aligned multi-metric simulator for early clinical risk detection.",
+    stack: ["Health-AI", "Analytics"],
+    docLink: "https://github.com/mintmojito-lite"
+  },
+  {
+    id: "LIPIPARVATHAM",
+    name: "Offline Indian-Language Phonetic Transliteration & Unicode Normalization System",
+    short: "Offline Transliterator",
+    detail: "Sub-50ms offline NLP transliteration engine supporting multiple Indian languages.",
+    stack: ["NLP", "Unicode", "Mobile"],
+    docLink: "https://github.com/mintmojito-lite"
+  },
+  {
+    id: "MINDBITE",
+    name: "Adaptive Mood-Based Food Recommendation & Nutrition Personalization Application",
+    short: "Mood-Based Food System",
+    detail: "PCOD, region and health-aware recommendation engine with high-fidelity UI ecosystem.",
+    stack: ["UX", "Firebase"],
+    docLink: "https://github.com/mintmojito-lite"
+  },
+  {
+    id: "SCHEMIC",
+    name: "Semantic Schema-Driven Code Generation Engine",
+    short: "Auto-Infrastructure",
+    detail: "Generates multi-service backend scaffolds from high-level schemas. 75% faster delivery.",
+    stack: ["Python", "DevTools"],
+    docLink: "https://github.com/mintmojito-lite"
+  },
+  {
+    id: "NEUROV2",
+    name: "High-Performance JIT Transpiling Engine for Python-to-C++ Parallel Execution",
+    short: "JIT C++ Transpiler",
+    detail: "AST-based compiler converting Python to multi-core C++ kernels. True parallelism unlocked.",
+    stack: ["Compiler", "OpenMP"],
+    docLink: "https://github.com/mintmojito-lite"
+  },
+{
+  id: "ATCA-AI",
+  name: "ATCA-AI",
+  short: "Active Thermal Control Architecture",
+  detail: "AI-driven urban thermal control system featuring real-time 3D airflow simulation, micro-climate prediction, and urban heat mitigation using reinforcement learning and voxel-based GIS modeling.",
+  stack: ["GeoAI", "PyTorch", "Reinforcement Learning", "PyVista", "NumPy"],
+  docLink: "https://github.com/mintmojito-lite/ATCA-AI"
+},
+
+{
+  id: "GHOST-AI",
+  name: "Ghost Navigation System",
+  short: "AI GPS-blackout navigation for hypersonic flight",
+  detail: "A physics + AI fusion navigation model that keeps a hypersonic glide vehicle on a safe path even when GPS and communication blackout happens due to plasma. Fully simulated, ethical aerospace research.",
+  stack: ["PyTorch", "NumPy", "Physics Sim", "GNC"],
+  docLink: "https://github.com/mintmojito-lite/Ghost-AI"
+}
+,
+  {
+    id: "CGRAG",
+    name: "GPU-Optimized Graph Retrieval-Augmented Generation Query Analyzer",
+    short: "GPU Graph Retrieval",
+    detail: "Graph-accelerated Retrieval-Augmented Generation engine using RAPIDS/cuGraph.",
+    stack: ["CUDA", "RAG"],
+    docLink: "https://github.com/mintmojito-lite"
   },
   
-  { 
-    id: "ECHO_VEC",
-    name: "Project Echo", 
-    short: "Vector AI Transformer", 
-    detail: "Internal AI tool utilizing vector embeddings to map complex queries to documentation.",
-    stack: ["Vector DB", "Transformers", "NLP"],
-    docLink: "https://docs.google.com/document/d/1TfKpQ8JtbNeurVRgMpKxhEKknwW5wLJrKsg_BaT5SII/edit?usp=sharing" 
+  {
+    id: "DFEC",
+    name: "Dynamic Federated Edge Compliance Secure Adaptive Policy Enforcement on Edge Networks",
+    short: "Parallel Entropy Compression",
+    detail: "Fault-resistant data compression kernel optimized for multi-core distributed execution.",
+    stack: ["C++", "Systems"],
+    docLink: "https://github.com/mintmojito-lite"
   },
+  {
+    id: "ECHO",
+    name: "Project Echo-DIGITAL TWIN",
+    short: "Vector Intelligence Core Based On Our Memory",
+    detail: "An next gen agentic ai that can behave excatly like you from text to viedo , this project is on going anyone can join .",
+    stack: ["Vector DB", "NLP"],
+    docLink: "https://github.com/mintmojito-lite"
+  }
 ];
 
 export default function Projects() {
   return (
-    <section className="mx-auto max-w-7xl px-8 py-20 md:py-32" id="projects">
-      {/* Header */}
-      <div className="mb-16">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#333] transition-colors duration-500 hover:text-white">
-          Systems I <span className="text-cyan-900 transition-colors duration-500 hover:text-cyan-400">Designed</span>
+    <section id="projects" className="w-full relative z-20">
+      <div className="py-12 px-8 max-w-7xl mx-auto text-center">
+        <h1 className="text-5xl font-bold text-[#333] hover:text-white mb-4">
+          Systems <span className="text-cyan-900 hover:text-cyan-400">Deployed</span>
         </h1>
+        <p className="font-mono text-xs text-gray-500 uppercase tracking-widest">
+         
+        </p>
       </div>
-
-      {/* Grid */}
-      <div className="grid gap-8 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-        {projects.map((p, i) => (
-          <TiltCard key={i} index={i} project={p} />
-        ))}
-      </div>
+      <ProjectStack projects={projects} />
+      <div className="h-[5vh]" />
     </section>
-  );
-}
-
-function TiltCard({ project, index }: { project: any, index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
-  const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
-  
-  // Reduced tilt angle slightly for a more stable "Card" feel
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], ["8deg", "-8deg"]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-8deg", "8deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseXPct = (e.clientX - rect.left) / width - 0.5;
-    const mouseYPct = (e.clientY - rect.top) / height - 0.5;
-    x.set(mouseXPct);
-    y.set(mouseYPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      style={{ perspective: 1000 }} 
-      className="group relative h-full w-full cursor-pointer"
-    >
-      {/* CARD CONTAINER - Mimics the 'Wall of Portfolios' Profile Card aesthetics */}
-      <motion.div
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative h-full flex flex-col overflow-hidden rounded-2xl border border-[#1a1a1a] bg-[#050505] p-6 transition-all duration-500 hover:border-cyan-500/30 hover:shadow-2xl hover:shadow-cyan-900/10"
-      >
-        {/* --- 3D GLOW EFFECT LAYER --- */}
-        {/* This layer floats above the content (translateZ 50px) to create a 'glass sheen' effect */}
-        <div 
-            style={{ transform: "translateZ(50px)" }} 
-            className="pointer-events-none absolute -inset-[100%] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(6,182,212,0.15),transparent_50%)]" />
-        </div>
-
-        {/* 1. IDENTITY HEADER (Name + Handle) - Logos Removed */}
-        <div style={{ transform: "translateZ(20px)" }} className="flex items-start gap-4 mb-6">
-            <div>
-                <h2 className="text-xl font-bold text-[#ddd] leading-tight group-hover:text-white transition-colors">
-                    {project.name}
-                </h2>
-                <div className="flex items-center gap-2 mt-1">
-                    <span className="text-[10px] font-medium text-[#444] uppercase tracking-wider">{project.short}</span>
-                </div>
-            </div>
-        </div>
-
-        {/* 2. ABOUT SECTION (Description) */}
-        <div style={{ transform: "translateZ(10px)" }} className="mb-8 flex-grow">
-            <p className="text-sm leading-relaxed text-[#666] group-hover:text-gray-300 transition-colors">
-                {project.detail}
-            </p>
-        </div>
-
-        {/* 3. FOOTER (Action Button Only) */}
-        <div style={{ transform: "translateZ(15px)" }} className="mt-auto border-t border-[#1a1a1a] pt-4">
-            <div className="flex flex-col gap-4">
-                
-                {/* Action Button - Animates on Scroll */}
-                <motion.a 
-                    href={project.docLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
-                    className="w-full block rounded-lg border border-[#222] bg-[#0a0a0a] py-3 text-center text-xs font-bold uppercase tracking-widest text-[#555] transition-all hover:bg-cyan-950/30 hover:text-cyan-400 hover:border-cyan-500/50"
-                >
-                    View System Details
-                </motion.a>
-            </div>
-        </div>
-
-      </motion.div>
-    </motion.div>
   );
 }

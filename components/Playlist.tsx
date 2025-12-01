@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 
 export default function Playlist() {
   return (
-    <section className="mx-auto max-w-4xl px-6 py-20 text-center" id="playlist">
+    <section className="mx-auto max-w-4xl px-6 py-12 text-center" id="playlist">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="rounded-2xl border border-[#1a1a1a] bg-[#050505] p-10"
+        className=""
       >
         <h1 className="mb-6 text-2xl font-bold text-[#333] transition-colors duration-500 hover:text-white">
           Wanna listen to my <span className="text-cyan-900 transition-colors duration-500 hover:text-cyan-400">Playlist??</span>

@@ -2,7 +2,7 @@
 
 export default function Contact() {
   return (
-    <section className="mx-auto max-w-4xl px-6 pb-32 pt-20 text-center" id="contact">
+    <section className="mx-auto max-w-4xl px-6 pb-8 pt-12 text-center" id="contact">
       {/* Updated Header */}
       <h1 className="mb-8 text-2xl sm:text-3xl md:text-4xl font-bold text-[#333] transition-colors duration-500 hover:text-white">
         Wanna know more or <span className="text-cyan-900 transition-colors duration-500 hover:text-cyan-400">any doubts?</span>

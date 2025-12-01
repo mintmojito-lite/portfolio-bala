@@ -11,7 +11,7 @@ export default function ProjectViewer({ url = "https://example.com" }) {
       initial={{ opacity: 0, scale: 0.95, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="mt-6 flex h-[85vh] w-full flex-col overflow-hidden rounded-xl border border-white/10 bg-black/40 shadow-2xl backdrop-blur-md"
+      className="liquid-glass-card mt-6 flex h-[85vh] w-full flex-col overflow-hidden rounded-xl border border-white/10 bg-black/40 shadow-2xl backdrop-blur-md"
     >
       {/* 1. Mock Browser Header */}
       <div className="flex items-center gap-2 border-b border-white/5 bg-white/5 px-4 py-3">

@@ -60,7 +60,7 @@ export default function DancingCat() {
               exit={{ opacity: 0, scale: 0.8 }}
               className="absolute -top-8 left-10 w-max rounded-lg border border-cyan-500/30 bg-black/80 px-2 py-1 text-[8px] font-bold text-cyan-400 backdrop-blur-md"
             >
-              Click me to dance! 🕺 
+              Hola! 
             </motion.div>
           )}
         </AnimatePresence>

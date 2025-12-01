@@ -1,4 +1,7 @@
-"use client";
+'use client';
+
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const organizations = [
   { 
@@ -59,67 +62,70 @@ const organizations = [
   },
 ];
 
+type Organization = typeof organizations[0];
+
 export default function Certifications() {
+  const [showOrgs, setShowOrgs] = useState(false);
+  const [selectedOrg, setSelectedOrg] = useState<Organization | null>(null);
+
   return (
-    <section className="py-20 md:py-32 w-full overflow-hidden" id="learning">
-      <div className="mx-auto max-w-7xl px-8 mb-16">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#333] transition-colors duration-500 hover:text-white">
+    <section className="py-12 md:py-16 w-full relative" id="learning">
+      <div 
+        className="mx-auto max-w-4xl px-8 text-center relative"
+        onMouseEnter={() => setShowOrgs(true)}
+        onMouseLeave={() => {
+          setShowOrgs(false);
+          setSelectedOrg(null);
+        }}
+      >
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-700 transition-colors duration-500 hover:text-white cursor-pointer">
           My Learning <span className="text-cyan-900 transition-colors duration-500 hover:text-cyan-400">Ecosystem</span>
         </h1>
+        
+        <AnimatePresence>
+          {showOrgs && (
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4"
+            >
+              {organizations.map((org) => (
+                <p 
+                  key={org.id}
+                  onMouseEnter={() => setSelectedOrg(org)}
+                  className="font-mono text-sm text-gray-500 hover:text-white cursor-pointer transition-colors"
+                >
+                  {org.name}
+                </p>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
-      <div className="relative w-full flex overflow-hidden mask-gradient">
-        <div className="flex animate-marquee items-start hover-pause">
-          
-          {/* We map twice to create the seamless loop effect */}
-          {[...organizations, ...organizations].map((org, i) => (
-            <div 
-              key={i} 
-              // ✅ FIX: w-[80vw] means "80% of screen width" on mobile.
-              // ✅ FIX: md:w-[400px] means "400px" on Desktop (medium screens and up).
-              className="group/card mx-4 md:mx-6 w-[80vw] md:w-[400px] flex-shrink-0 cursor-default rounded-xl border border-[#1a1a1a] bg-[#050505] p-6 transition-colors hover:border-cyan-500/30 hover:bg-[#080808]"
+      <div className="mt-12 mx-auto max-w-4xl px-8 h-48">
+        <AnimatePresence mode="wait">
+          {selectedOrg && (
+            <motion.div
+              key={selectedOrg.id}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              transition={{ duration: 0.3 }}
             >
-              <div className="mb-4">
-                {/* Full Name */}
-                <h3 className="text-lg font-bold text-[#444] transition-colors group-hover/card:text-white leading-tight">
-                  {org.name}
-                </h3>
-              </div>
-              
-              {/* Role Reveal - Now handles lists */}
-              <div className="mt-2 h-0 overflow-hidden transition-all duration-500 group-hover/card:h-auto">
-                <div className="pt-4 border-t border-[#1a1a1a]">
-                  <p className="text-[10px] font-mono text-cyan-600 mb-2 uppercase tracking-wider">Trained Modules:</p>
-                  <ul className="space-y-1">
-                    {org.courses.map((course, j) => (
-                      <li key={j} className="text-xs font-mono text-gray-400 leading-relaxed flex items-start gap-2">
-                        <span className="text-cyan-800 mt-0.5">›</span> {course}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              <h3 className="text-lg font-bold text-cyan-400 mb-4 text-center">{selectedOrg.name}</h3>
+              <ul className="space-y-2">
+                {selectedOrg.courses.map((course, j) => (
+                  <li key={j} className="text-sm font-mono text-gray-400 flex items-start gap-2">
+                     <span className="text-cyan-800 mt-0.5">›</span> {course}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-      
-      <style jsx>{`
-        .animate-marquee {
-          display: flex;
-          animation: marquee 40s linear infinite;
-        }
-        .hover-pause:hover {
-          animation-play-state: paused;
-        }
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .mask-gradient {
-           mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        }
-      `}</style>
     </section>
   );
 }

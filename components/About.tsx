@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section className="relative mx-auto max-w-2xl sm:max-w-3xl md:max-w-4xl px-8 py-20 md:py-32" id="about">
+    <section className="relative mx-auto max-w-2xl sm:max-w-3xl md:max-w-4xl px-8 py-12 md:py-16" id="about">
       
       <div className="space-y-16">
         
@@ -12,7 +12,7 @@ export default function About() {
         </StealthParagraph>
 
         <StealthParagraph>
-          I've engineered <GlowSpan>six real systems</GlowSpan> not the typical snake game, to-do app, or "hello world" clones. 
+          I've engineered <GlowSpan>Twelve real systems</GlowSpan> not the typical snake game, to-do app, or "hello world" clones. 
           These span <GlowSpan>cybersecurity, AI pipelines, medical analytics, NLP</GlowSpan>, and trust-focused architectures. 
           Check them below. If you want to see what actual engineering looks like, so let's skip the formalities and get to the real part.
         </StealthParagraph>
